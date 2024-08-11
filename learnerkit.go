@@ -4,6 +4,10 @@ import (
 	. "gorgonia.org/gorgonia"
 )
 
+type LearnerKitModel struct {
+	model_kit *[]*LearnerKit
+}
+
 type LearnerKit struct {
 	node    LearnerKitNode
 	graph   LearnerKitGraph
@@ -14,15 +18,17 @@ type LearnerKit struct {
 type LearnerKitNode struct {
 	node *[]*Node
 }
+
+type LearnerKitOps struct {
+	ops Op
+}
+
 type LearnerKitGraph struct {
 	g *ExprGraph
 }
 
 type LearnerKitMachine struct {
 	machine VM
-}
-type LearnerKitOps struct {
-	ops Op
 }
 
 func ApplyOps_LearnerKit(op Op, children ...*Node) (*Node, error) {
@@ -54,4 +60,11 @@ func Initialize_LearnerKit(graph *ExprGraph, machine VM, op Op, node_v ...*Node)
 	}
 
 	return learnerkit
+}
+
+func Initialize_LearnerKitModel(kit ...*LearnerKit) LearnerKitModel {
+	learner_model := LearnerKitModel{
+		model_kit: &kit,
+	}
+	return learner_model
 }
