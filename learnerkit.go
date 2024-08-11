@@ -12,7 +12,6 @@ type LearnerKit struct {
 }
 
 type LearnerKitNode struct {
-	size int
 	node *[]*Node
 }
 type LearnerKitGraph struct {
@@ -34,7 +33,7 @@ func ApplyOps_With_Name_LearnerKit(op Op, name string, children ...*Node) {
 	ApplyOpWithName(op, name, children...)
 }
 
-func Initialize_LearnerKit(graph *ExprGraph, machine VM, size int, op Op, node_v ...*Node) LearnerKit {
+func Initialize_LearnerKit(graph *ExprGraph, machine VM, op Op, node_v ...*Node) LearnerKit {
 	learnerkitnode := LearnerKitNode{
 		node: &node_v,
 	}
