@@ -25,12 +25,12 @@ type LearnerKitOps struct {
 	ops Op
 }
 
-func ApplyOps_LearnerKit(op Op, children ...*Node) {
-	ApplyOp(op, children...)
+func ApplyOps_LearnerKit(op Op, children ...*Node) (*Node, error) {
+	return ApplyOp(op, children...)
 }
 
-func ApplyOps_With_Name_LearnerKit(op Op, name string, children ...*Node) {
-	ApplyOpWithName(op, name, children...)
+func ApplyOps_With_Name_LearnerKit(op Op, name string, children ...*Node) (*Node, error) {
+	return ApplyOpWithName(op, name, children...)
 }
 
 func Initialize_LearnerKit(graph *ExprGraph, machine VM, op Op, node_v ...*Node) LearnerKit {
