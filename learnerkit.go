@@ -5,7 +5,7 @@ import (
 )
 
 type LearnerKitModel struct {
-	model_kit *[]*LearnerKit
+	model_kit []LearnerKit
 }
 
 type LearnerKit struct {
@@ -39,6 +39,23 @@ func ApplyOps_With_Name_LearnerKit(op Op, name string, children ...*Node) (*Node
 	return ApplyOpWithName(op, name, children...)
 }
 
+func ApplyOps_LearnerKitModel(model LearnerKitModel) ([][]Node, error) {
+	results := make([][]Node, len(*&model.model_kit))
+	var e error
+	for i := 0; i < len(model.model_kit); i++ {
+		result := make([]Node, len(*model.model_kit[i].node.node))
+		for j := 0; j < len(*model.model_kit[i].node.node); j++ {
+			value, e := ApplyOps_LearnerKit(model.model_kit[i].op.ops, *model.model_kit[j].node.node...)
+			if e != nil {
+				break
+			}
+			result = append(result, *value)
+		}
+		results[i] = result
+	}
+	return results, e
+}
+
 func Initialize_LearnerKit(graph *ExprGraph, machine VM, op Op, node_v ...*Node) LearnerKit {
 	learnerkitnode := LearnerKitNode{
 		node: &node_v,
@@ -58,13 +75,12 @@ func Initialize_LearnerKit(graph *ExprGraph, machine VM, op Op, node_v ...*Node)
 		machine: learnerkitmachine,
 		op:      learnerkitops,
 	}
-
 	return learnerkit
 }
 
-func Initialize_LearnerKitModel(kit ...*LearnerKit) LearnerKitModel {
+func Initialize_LearnerKitModel(kit []LearnerKit) LearnerKitModel {
 	learner_model := LearnerKitModel{
-		model_kit: &kit,
+		model_kit: kit,
 	}
 	return learner_model
 }
