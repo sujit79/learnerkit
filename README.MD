@@ -7,3 +7,8 @@ It creates an environment for creation of ML based Neural Network Experiments, c
 
 ## Dependencies
 Dependent on https://github.com/gorgonia/gorgonia/ <br/>
+
+## Experiment
+Multiple Models are allowed and a gradient comparision of all models are done, by gradient we mean
+Model 1 and Model 2 are run for example for Model 1 to Model 2. This means type safety is needed and
+run time exceptions are possible, we provide error for each of these runs too. 
