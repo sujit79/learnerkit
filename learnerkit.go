@@ -40,7 +40,7 @@ func ApplyOps_With_Name_LearnerKit(op Op, name string, children ...*Node) (*Node
 }
 
 func ApplyOps_LearnerKitModel(model LearnerKitModel) ([][]Node, error) {
-	results := make([][]Node, len(*&model.model_kit))
+	results := make([][]Node, len(model.model_kit))
 	var e error
 	for i := 0; i < len(model.model_kit); i++ {
 		result := make([]Node, len(*model.model_kit[i].node.node))
