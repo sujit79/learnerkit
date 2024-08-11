@@ -46,9 +46,9 @@ func ApplyOps_LearnerKitModel(model LearnerKitModel) ([][]Node, []error) {
 		result := make([]Node, len(*model.model_kit[i].node.node))
 		for j := 0; j < len(*model.model_kit[i].node.node); j++ {
 			value, e := ApplyOps_LearnerKit(model.model_kit[i].op.ops, *model.model_kit[j].node.node...)
+			err_resp = append(err_resp, e)
 			if e != nil {
-				err_resp = append(err_resp, e)
-				break
+				continue
 			}
 			result = append(result, *value)
 		}
@@ -64,9 +64,9 @@ func ApplyOps_WithName_LearnerKitModel(model LearnerKitModel, name string) ([][]
 		result := make([]Node, len(*model.model_kit[i].node.node))
 		for j := 0; j < len(*model.model_kit[i].node.node); j++ {
 			value, e := ApplyOps_With_Name_LearnerKit(model.model_kit[i].op.ops, name, *model.model_kit[j].node.node...)
+			err_resp = append(err_resp, e)
 			if e != nil {
-				err_resp = append(err_resp, e)
-				break
+				continue
 			}
 			result = append(result, *value)
 		}
